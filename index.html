@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOL6 PDF Manager - Futuristic Minimalism</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* Light Mode - Pure Black & White */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --border-color: #000000;
+            --accent: #000000;
+            --accent-hover: #333333;
+            --loader-dot: #000000;
+            --card-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
+            --glow-effect: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
+        }
+
+        /* Header - Ultra Minimal */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* Futuristic Loader Styles */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0.95;
+        }
+
+        .loader-container.active {
+            display: flex;
+        }
+
+        /* Loader 1 - Quantum Pulse */
+        .quantum-loader {
+            display: flex;
+            gap: 15px;
+        }
+
+        .quantum-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            animation: quantumPulse 1.5s infinite ease-in-out;
+        }
+
+        .quantum-dot:nth-child(1) { animation-delay: -0.3s; }
+        .quantum-dot:nth-child(2) { animation-delay: -0.15s; }
+        .quantum-dot:nth-child(3) { animation-delay: 0; }
+
+        @keyframes quantumPulse {
+            0%, 100% { transform: scale(0.5); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+
+        /* Loader 2 - Binary Scanner */
+        .binary-loader {
+            font-family: monospace;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .binary-loader::before {
+            content: '0101010101010101';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            opacity: 0.5;
+            animation: binaryScan 2s linear infinite;
+            white-space: nowrap;
+        }
+
+        .binary-loader::after {
+            content: '1010101010101010';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            opacity: 0.5;
+            animation: binaryScan 2s linear infinite reverse;
+            white-space: nowrap;
+        }
+
+        @keyframes binaryScan {
+            0% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+            50% { transform: translateX(-50%) translateY(-5px); opacity: 1; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+        }
+
+        /* Loader 3 - Holographic Ring */
+        .holo-loader {
+            width: 80px;
+            height: 80px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--text-primary);
+            border-bottom: 2px solid var(--text-primary);
+            border-radius: 50%;
+            animation: holoSpin 1s linear infinite;
+            position: relative;
+        }
+
+        .holo-loader::before,
+        .holo-loader::after {
+            content: '';
+            position: absolute;
+            border: 2px solid transparent;
+            border-radius: 50%;
+        }
+
+        .holo-loader::before {
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border-top: 2px solid var(--text-primary);
+            border-bottom: 2px solid var(--text-primary);
+            animation: holoSpin 2s linear infinite reverse;
+        }
+
+        .holo-loader::after {
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border-left: 2px solid var(--text-primary);
+            border-right: 2px solid var(--text-primary);
+            animation: holoSpin 1.5s linear infinite;
+        }
+
+        @keyframes holoSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Loader 4 - Matrix Rain */
+        .matrix-loader {
+            font-family: monospace;
+            font-size: 20px;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+            height: 100px;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            animation: matrixFall 3s linear infinite;
+            white-space: nowrap;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: -5px;
+        }
+
+        @keyframes matrixFall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(200%); }
+        }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Cards - No Borders, Pure Minimalism */
+        .card {
+            background: var(--bg-secondary);
+            padding: 40px 30px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 95%, var(--text-primary) 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .card-header .line {
+            width: 40px;
+            height: 1px;
+            background: var(--text-primary);
+            transition: width 0.3s;
+        }
+
+        .card:hover .line {
+            width: 60px;
+        }
+
+        /* Drag Area - Minimalist */
+        .drag-area {
+            border: 1px dashed var(--text-primary);
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+        }
+
+        .drag-area:hover {
+            background: var(--bg-primary);
+            border-style: solid;
+        }
+
+        .drag-area.dragover {
+            background: var(--bg-primary);
+            border-style: solid;
+            transform: scale(1.02);
+        }
+
+        .drag-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            opacity: 0.7;
+        }
+
+        /* File List - Clean */
+        .file-list {
+            margin: 20px 0;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .remove-file {
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .remove-file:hover {
+            opacity: 1;
+        }
+
+        /* Buttons - Minimalist */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--text-primary);
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--bg-primary);
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary::before {
+            background: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            color: var(--text-primary);
+        }
+
+        /* Pages Container for Rearrange */
+        .pages-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 15px 0;
+        }
+
+        .page-thumb {
+            width: 80px;
+            height: 100px;
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: move;
+            transition: all 0.3s;
+            position: relative;
+            opacity: 0.8;
+        }
+
+        .page-thumb:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            box-shadow: var(--glow-effect);
+        }
+
+        .page-thumb.dragging {
+            opacity: 0.3;
+            transform: scale(0.95);
+        }
+
+        .page-number {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
+
+        /* Status Messages */
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            text-align: center;
+        }
+
+        .status.show {
+            opacity: 1;
+        }
+
+        .status.success {
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+        }
+
+        .status.error {
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        /* Footer - No Borders */
+        .footer {
+            margin-top: 80px;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .footer .signature {
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        .footer .signature span {
+            font-weight: 400;
+            letter-spacing: 4px;
+        }
+
+        /* Cache Bar - Minimalist */
+        .cache-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--text-primary);
+            border-bottom: 1px solid var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .cache-info {
+            display: flex;
+            gap: 40px;
+        }
+
+        .cache-metric {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .metric-label {
+            opacity: 0.5;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* Progress Bar */
+        .cache-progress {
+            width: 200px;
+            height: 1px;
+            background: var(--text-primary);
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 3px;
+            background: var(--text-primary);
+            width: 0%;
+            position: absolute;
+            top: -1px;
+            transition: width 0.3s;
+        }
+
+        /* Modal - Minimalist */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 400px;
+            width: 90%;
+            padding: 40px;
+            background: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .modal-content p {
+            margin-bottom: 30px;
+            opacity: 0.7;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .logo::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .cache-bar {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .cache-info {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Futuristic Loaders -->
+    <div class="loader-container" id="quantumLoader">
+        <div class="quantum-loader">
+            <div class="quantum-dot"></div>
+            <div class="quantum-dot"></div>
+            <div class="quantum-dot"></div>
+        </div>
+    </div>
+
+    <div class="loader-container" id="binaryLoader">
+        <div class="binary-loader">PROCESSING</div>
+    </div>
+
+    <div class="loader-container" id="holoLoader">
+        <div class="holo-loader"></div>
+    </div>
+
+    <div class="loader-container" id="matrixLoader">
+        <div class="matrix-loader">
+            <div class="matrix-column" style="left: 20%; animation-delay: 0s;">0101</div>
+            <div class="matrix-column" style="left: 40%; animation-delay: 0.5s;">1010</div>
+            <div class="matrix-column" style="left: 60%; animation-delay: 1s;">0110</div>
+            <div class="matrix-column" style="left: 80%; animation-delay: 1.5s;">1001</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">SOL6</div>
+            <div class="cache-status">
+                <span>CACHE: <span id="cacheSize">0</span> MB</span>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Merge Card -->
+            <div class="card" id="mergeCard">
+                <div class="card-header">
+                    <h2>MERGE</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="drag-area" id="mergeDragArea">
+                    <div class="drag-icon">⬇️</div>
+                    <p>DROP FILES</p>
+                    <small>PDF only</small>
+                </div>
+                <div class="file-list" id="mergeFileList"></div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="processMerge()">MERGE</button>
+                    <button class="btn" onclick="clearBox('merge')">CLEAR</button>
+                </div>
+                <div id="mergeStatus" class="status"></div>
+            </div>
+
+            <!-- Split Card -->
+            <div class="card" id="splitCard">
+                <div class="card-header">
+                    <h2>SPLIT</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="drag-area" id="splitDragArea">
+                    <div class="drag-icon">✂️</div>
+                    <p>DROP PDF</p>
+                    <small>single file</small>
+                </div>
+                <div class="file-list" id="splitFileList"></div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="processSplit()">SPLIT</button>
+                    <button class="btn" onclick="clearBox('split')">CLEAR</button>
+                </div>
+                <div id="splitStatus" class="status"></div>
+            </div>
+
+            <!-- Rearrange Card -->
+            <div class="card" id="rearrangeCard">
+                <div class="card-header">
+                    <h2>REARRANGE</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="drag-area" id="rearrangeDragArea">
+                    <div class="drag-icon">🔄</div>
+                    <p>DROP PDF</p>
+                    <small>reorder pages</small>
+                </div>
+                <div class="file-list" id="rearrangeFileList"></div>
+                <div class="pages-container" id="pagesContainer"></div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="downloadRearranged()">DOWNLOAD</button>
+                    <button class="btn" onclick="resetPageOrder()">RESET</button>
+                    <button class="btn" onclick="clearBox('rearrange')">CLEAR</button>
+                </div>
+                <div id="rearrangeStatus" class="status"></div>
+            </div>
+        </div>
+
+        <!-- Cache Bar -->
+        <div class="cache-bar">
+            <div class="cache-info">
+                <div class="cache-metric">
+                    <span class="metric-value" id="totalFiles">0</span>
+                    <span class="metric-label">FILES</span>
+                </div>
+                <div class="cache-metric">
+                    <span class="metric-value" id="cacheUsage">0</span>
+                    <span class="metric-label">MB</span>
+                </div>
+                <div class="cache-progress">
+                    <div class="progress-fill" id="cacheProgress"></div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn" onclick="clearCache()">CLEAR CACHE</button>
+                <button class="btn" onclick="showResetModal()">RESET</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="signature">
+                CREATED BY <span>SOL6 - M ROODE</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Reset Modal -->
+    <div class="modal" id="resetModal">
+        <div class="modal-content">
+            <h3>RESET SYSTEM</h3>
+            <p>This will erase all cached data and reset all operations. This action cannot be undone.</p>
+            <div class="modal-footer">
+                <button class="btn" onclick="hideResetModal()">CANCEL</button>
+                <button class="btn btn-primary" onclick="resetAll()">EXECUTE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Libraries -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <script>
+        // Initialize PDF.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        // Cache configuration
+        const CACHE_KEY = 'sol6_cache';
+        const CACHE_LIMIT = 50 * 1024 * 1024; // 50MB
+
+        // App state
+        let appState = {
+            merge: [],
+            split: [],
+            rearrange: [],
+            pageOrders: {},
+            timestamp: Date.now()
+        };
+
+        // Load from cache
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(CACHE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Date.now() - parsed.timestamp < 86400000) { // 24 hours
+                        appState = parsed;
+                    }
+                }
+            } catch (e) {
+                console.warn('Cache load failed');
+            }
+            updateUI();
+        }
+
+        // Save to cache
+        function saveState() {
+            try {
+                appState.timestamp = Date.now();
+                localStorage.setItem(CACHE_KEY, JSON.stringify(appState));
+                updateCacheDisplay();
+            } catch (e) {
+                showGlobalStatus('Cache limit reached', 'error');
+            }
+        }
+
+        // Update UI
+        function updateUI() {
+            updateFileList('merge');
+            updateFileList('split');
+            updateFileList('rearrange');
+            updateCacheDisplay();
+        }
+
+        // Update file list
+        function updateFileList(type) {
+            const list = document.getElementById(type + 'FileList');
+            if (!list) return;
+            
+            list.innerHTML = '';
+            appState[type].forEach((file, index) => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.innerHTML = `
+                    <span>${file.name}</span>
+                    <span class="remove-file" onclick="removeFile('${type}', ${index})">×</span>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        // Update cache display
+        function updateCacheDisplay() {
+            const totalFiles = appState.merge.length + appState.split.length + appState.rearrange.length;
+            document.getElementById('totalFiles').textContent = totalFiles;
+            
+            const cacheSize = (new Blob([JSON.stringify(appState)]).size / 1024 / 1024).toFixed(2);
+            document.getElementById('cacheSize').textContent = cacheSize;
+            document.getElementById('cacheUsage').textContent = cacheSize;
+            
+            const percent = Math.min((cacheSize / 50) * 100, 100);
+            document.getElementById('cacheProgress').style.width = percent + '%';
+        }
+
+        // Loader management
+        function showLoader(type) {
+            document.querySelectorAll('.loader-container').forEach(l => l.classList.remove('active'));
+            document.getElementById(type + 'Loader').classList.add('active');
+        }
+
+        function hideLoader() {
+            document.querySelectorAll('.loader-container').forEach(l => l.classList.remove('active'));
+        }
+
+        // Show status
+        function showStatus(elementId, message, type) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.textContent = message;
+                el.className = 'status ' + type + ' show';
+                setTimeout(() => {
+                    el.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Drag and drop setup
+        function setupDragAndDrop() {
+            const areas = ['mergeDragArea', 'splitDragArea', 'rearrangeDragArea'];
+            
+            areas.forEach(areaId => {
+                const area = document.getElementById(areaId);
+                const type = areaId.replace('DragArea', '');
+                
+                area.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    area.classList.add('dragover');
+                });
+                
+                area.addEventListener('dragleave', () => {
+                    area.classList.remove('dragover');
+                });
+                
+                area.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    area.classList.remove('dragover');
+                    
+                    const files = Array.from(e.dataTransfer.files).filter(f => f.type === 'application/pdf');
+                    
+                    if (type === 'split' && files.length > 1) {
+                        showStatus(type + 'Status', 'Only one file allowed', 'error');
+                        return;
+                    }
+                    
+                    if (files.length) {
+                        handleFiles(type, files);
+                    }
+                });
+                
+                area.addEventListener('click', () => {
+                    const input = document.createElement('input');
+                    input.type = 'file';
+                    input.accept = '.pdf';
+                    input.multiple = type === 'merge';
+                    
+                    input.onchange = (e) => {
+                        const files = Array.from(e.target.files);
+                        handleFiles(type, files);
+                    };
+                    
+                    input.click();
+                });
+            });
+        }
+
+        // Handle dropped files
+        async function handleFiles(type, files) {
+            showLoader('quantum');
+            
+            for (const file of files) {
+                const base64 = await fileToBase64(file);
+                appState[type].push({
+                    id: Date.now() + Math.random(),
+                    name: file.name,
+                    data: base64,
+                    size: file.size
+                });
+            }
+            
+            saveState();
+            updateFileList(type);
+            
+            if (type === 'rearrange' && appState.rearrange.length === 1) {
+                await loadPagesForRearrange();
+            }
+            
+            hideLoader();
+        }
+
+        // File to base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+            });
+        }
+
+        // Remove file
+        function removeFile(type, index) {
+            appState[type].splice(index, 1);
+            if (type === 'rearrange') {
+                document.getElementById('pagesContainer').innerHTML = '';
+            }
+            saveState();
+            updateFileList(type);
+        }
+
+        // Clear box
+        function clearBox(type) {
+            appState[type] = [];
+            if (type === 'rearrange') {
+                document.getElementById('pagesContainer').innerHTML = '';
+            }
+            saveState();
+            updateFileList(type);
+        }
+
+        // Merge PDFs
+        async function processMerge() {
+            if (appState.merge.length < 2) {
+                showStatus('mergeStatus', 'Need at least 2 files', 'error');
+                return;
+            }
+
+            showLoader('holo');
+            
+            try {
+                const { PDFDocument } = PDFLib;
+                const merged = await PDFDocument.create();
+                
+                for (const file of appState.merge) {
+                    const bytes = await fetch(file.data).then(r => r.arrayBuffer());
+                    const pdf = await PDFDocument.load(bytes);
+                    const pages = await merged.copyPages(pdf, pdf.getPageIndices());
+                    pages.forEach(p => merged.addPage(p));
+                }
+                
+                const mergedBytes = await merged.save();
+                downloadPDF(mergedBytes, 'merged.pdf');
+                showStatus('mergeStatus', 'MERGE COMPLETE', 'success');
+            } catch (error) {
+                showStatus('mergeStatus', 'ERROR: ' + error.message, 'error');
+            }
+            
+            hideLoader();
+        }
+
+        // Split PDF
+        async function processSplit() {
+            if (appState.split.length !== 1) {
+                showStatus('splitStatus', 'Drop one PDF file', 'error');
+                return;
+            }
+
+            showLoader('binary');
+            
+            try {
+                const { PDFDocument } = PDFLib;
+                const file = appState.split[0];
+                const bytes = await fetch(file.data).then(r => r.arrayBuffer());
+                const pdf = await PDFDocument.load(bytes);
+                
+                const zip = new JSZip();
+                
+                for (let i = 0; i < pdf.getPageCount(); i++) {
+                    const single = await PDFDocument.create();
+                    const [page] = await single.copyPages(pdf, [i]);
+                    single.addPage(page);
+                    const pageBytes = await single.save();
+                    zip.file(`page_${i + 1}.pdf`, pageBytes);
+                }
+                
+                const zipContent = await zip.generateAsync({ type: 'blob' });
+                downloadBlob(zipContent, `${file.name.replace('.pdf', '')}_pages.zip`);
+                showStatus('splitStatus', `SPLIT INTO ${pdf.getPageCount()} PAGES`, 'success');
+            } catch (error) {
+                showStatus('splitStatus', 'ERROR: ' + error.message, 'error');
+            }
+            
+            hideLoader();
+        }
+
+        // Load pages for rearrange
+        async function loadPagesForRearrange() {
+            if (appState.rearrange.length !== 1) return;
+            
+            const file = appState.rearrange[0];
+            const container = document.getElementById('pagesContainer');
+            container.innerHTML = '<div class="status show">LOADING PAGES...</div>';
+            
+            showLoader('matrix');
+            
+            try {
+                const bytes = await fetch(file.data).then(r => r.arrayBuffer());
+                const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+                
+                const order = appState.pageOrders[file.id] || Array.from({ length: pdf.numPages }, (_, i) => i);
+                
+                container.innerHTML = '';
+                
+                for (let i = 0; i < order.length; i++) {
+                    const thumb = createPageThumb(order[i] + 1, i);
+                    container.appendChild(thumb);
+                }
+                
+                setupPageDragDrop();
+            } catch (error) {
+                container.innerHTML = '<div class="status error show">LOAD FAILED</div>';
+            }
+            
+            hideLoader();
+        }
+
+        // Create page thumbnail
+        function createPageThumb(pageNum, index) {
+            const div = document.createElement('div');
+            div.className = 'page-thumb';
+            div.draggable = true;
+            div.setAttribute('data-index', index);
+            div.setAttribute('data-page', pageNum);
+            
+            div.innerHTML = `
+                <div class="page-number">${pageNum}</div>
+                <div>📄</div>
+            `;
+            
+            return div;
+        }
+
+        // Setup page drag and drop
+        function setupPageDragDrop() {
+            const thumbs = document.querySelectorAll('.page-thumb');
+            let dragged = null;
+            
+            thumbs.forEach(thumb => {
+                thumb.addEventListener('dragstart', (e) => {
+                    dragged = thumb;
+                    thumb.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', thumb.getAttribute('data-index'));
+                });
+                
+                thumb.addEventListener('dragend', () => {
+                    thumb.classList.remove('dragging');
+                    dragged = null;
+                });
+                
+                thumb.addEventListener('dragover', (e) => e.preventDefault());
+                
+                thumb.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    if (dragged === thumb) return;
+                    
+                    const container = document.getElementById('pagesContainer');
+                    const items = Array.from(container.children);
+                    const fromIndex = items.indexOf(dragged);
+                    const toIndex = items.indexOf(thumb);
+                    
+                    if (fromIndex < toIndex) {
+                        container.insertBefore(dragged, thumb.nextSibling);
+                    } else {
+                        container.insertBefore(dragged, thumb);
+                    }
+                    
+                    updatePageNumbers();
+                });
+            });
+        }
+
+        // Update page numbers
+        function updatePageNumbers() {
+            const container = document.getElementById('pagesContainer');
+            const thumbs = container.children;
+            
+            for (let i = 0; i < thumbs.length; i++) {
+                const thumb = thumbs[i];
+                thumb.setAttribute('data-index', i);
+                const numDiv = thumb.querySelector('.page-number');
+                if (numDiv) numDiv.textContent = i + 1;
+            }
+        }
+
+        // Reset page order
+        function resetPageOrder() {
+            if (appState.rearrange.length === 1) {
+                const file = appState.rearrange[0];
+                delete appState.pageOrders[file.id];
+                saveState();
+                loadPagesForRearrange();
+            }
+        }
+
+        // Download rearranged PDF
+        async function downloadRearranged() {
+            if (appState.rearrange.length !== 1) {
+                showStatus('rearrangeStatus', 'No PDF loaded', 'error');
+                return;
+            }
+
+            showLoader('holo');
+            
+            try {
+                const { PDFDocument } = PDFLib;
+                const file = appState.rearrange[0];
+                const bytes = await fetch(file.data).then(r => r.arrayBuffer());
+                const pdf = await PDFDocument.load(bytes);
+                
+                const container = document.getElementById('pagesContainer');
+                const order = Array.from(container.children).map(t => parseInt(t.getAttribute('data-page')) - 1);
+                
+                appState.pageOrders[file.id] = order;
+                saveState();
+                
+                const newPdf = await PDFDocument.create();
+                const pages = await newPdf.copyPages(pdf, order);
+                pages.forEach(p => newPdf.addPage(p));
+                
+                const newBytes = await newPdf.save();
+                downloadPDF(newBytes, `rearranged_${file.name}`);
+                showStatus('rearrangeStatus', 'DOWNLOAD READY', 'success');
+            } catch (error) {
+                showStatus('rearrangeStatus', 'ERROR: ' + error.message, 'error');
+            }
+            
+            hideLoader();
+        }
+
+        // Download helpers
+        function downloadPDF(bytes, filename) {
+            downloadBlob(new Blob([bytes], { type: 'application/pdf' }), filename);
+        }
+
+        function downloadBlob(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Cache management
+        function clearCache() {
+            if (confirm('Clear cache?')) {
+                appState = {
+                    merge: [],
+                    split: [],
+                    rearrange: [],
+                    pageOrders: {},
+                    timestamp: Date.now()
+                };
+                saveState();
+                updateUI();
+                document.getElementById('pagesContainer').innerHTML = '';
+            }
+        }
+
+        // Modal functions
+        function showResetModal() {
+            document.getElementById('resetModal').classList.add('active');
+        }
+
+        function hideResetModal() {
+            document.getElementById('resetModal').classList.remove('active');
+        }
+
+        function resetAll() {
+            localStorage.removeItem(CACHE_KEY);
+            appState = {
+                merge: [],
+                split: [],
+                rearrange: [],
+                pageOrders: {},
+                timestamp: Date.now()
+            };
+            updateUI();
+            document.getElementById('pagesContainer').innerHTML = '';
+            hideResetModal();
+        }
+
+        // Global status
+        function showGlobalStatus(message, type) {
+            console.log(`[${type}] ${message}`);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            setupDragAndDrop();
+        });
+    </script>
+</body>
+</html>
